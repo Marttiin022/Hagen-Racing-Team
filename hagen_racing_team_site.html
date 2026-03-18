@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hagen Racing Team</title>
+  <meta name="description" content="Web oficial de Hagen Racing Team, equipo del IES Sevilla La Nueva participante en STEM Racing 2026." />
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --bg-soft: #121722;
+      --card: #161d2b;
+      --text: #f3f6fb;
+      --muted: #b8c2d3;
+      --line: rgba(255,255,255,0.08);
+      --primary: #e10600;
+      --primary-2: #ff5a52;
+      --accent: #d6dde8;
+      --max: 1180px;
+      --radius: 20px;
+      --shadow: 0 18px 45px rgba(0,0,0,0.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(225,6,0,0.18), transparent 22%),
+        radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 18%),
+        linear-gradient(180deg, #0a0c11 0%, #0d1118 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(11,13,18,0.82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), #7a0000);
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      padding: 82px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      color: var(--accent);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.5rem, 7vw, 5.25rem);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 span { color: var(--primary); }
+
+    .hero p {
+      margin: 0 0 28px;
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      box-shadow: 0 14px 35px rgba(225,6,0,0.28);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .hero-panel {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: auto -30px -50px auto;
+      width: 170px;
+      height: 170px;
+      background: radial-gradient(circle, rgba(225,6,0,0.35), transparent 70%);
+      filter: blur(6px);
+    }
+
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .car-track {
+      position: relative;
+      min-height: 300px;
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.04)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 44px),
+        linear-gradient(180deg, #121723 0%, #0d1118 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+
+    .track-line {
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      top: 50%;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, rgba(255,255,255,0.8) 0 28px, transparent 28px 52px);
+      opacity: 0.8;
+    }
+
+    .car {
+      position: absolute;
+      left: 10%;
+      top: calc(50% - 18px);
+      width: 170px;
+      height: 36px;
+      background: linear-gradient(90deg, #5f0200, var(--primary), #ff6b63);
+      clip-path: polygon(8% 50%, 16% 18%, 64% 18%, 78% 0, 90% 0, 100% 22%, 100% 78%, 90% 100%, 78% 100%, 64% 82%, 16% 82%);
+      box-shadow: 0 10px 35px rgba(225,6,0,0.4);
+    }
+
+    .wheel {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #0a0c11;
+      border: 3px solid #98a4b8;
+      top: calc(50% - 12px);
+    }
+
+    .wheel.w1 { left: 18%; }
+    .wheel.w2 { left: 54%; }
+    .wheel.w3 { right: 22%; }
+    .wheel.w4 { right: 8%; }
+
+    section {
+      padding: 32px 0 80px;
+    }
+
+    .section-head {
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.25rem;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .feature {
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+    }
+
+    .feature .num {
+      display: inline-block;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--primary-2);
+      margin-bottom: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .team-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      min-height: 190px;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(225,6,0,0.3), rgba(255,255,255,0.08));
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .role {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: var(--accent);
+      font-size: 0.86rem;
+    }
+
+    .sponsors {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .logo-box {
+      min-height: 96px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.02);
+      display: grid;
+      place-items: center;
+      color: #8c98ac;
+      text-align: center;
+      padding: 12px;
+      font-size: 0.93rem;
+    }
+
+    .cta {
+      background:
+        radial-gradient(circle at top right, rgba(225,6,0,0.18), transparent 30%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .footer {
+      padding: 28px 0 48px;
+      color: #93a1b6;
+      border-top: 1px solid var(--line);
+      font-size: 0.95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1050px) {
+      .hero-grid,
+      .grid-2,
+      .sponsors,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .features,
+      .team-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav {
+        align-items: flex-start;
+        padding: 14px 0;
+        flex-direction: column;
+      }
+
+      .hero { padding-top: 48px; }
+
+      .hero-stats,
+      .features,
+      .team-grid,
+      .logo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel { padding: 18px; }
+
+      .car { width: 120px; }
+
+      .section-head h2 { line-height: 1.05; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#inicio">
+        <div class="brand-mark">H</div>
+        <div>Hagen Racing Team</div>
+      </a>
+      <nav class="nav-links">
+        <a href="#sobre">Sobre nosotros</a>
+        <a href="#proyecto">Proyecto</a>
+        <a href="#equipo">Equipo</a>
+        <a href="#patrocinio">Patrocinio</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </div>
+
+  <header class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">STEM Racing 2026 · IES Sevilla La Nueva</div>
+        <h1><span>Ingeniería</span>, diseño y velocidad.</h1>
+        <p>
+          Somos Hagen Racing Team, un equipo de 1º de Bachillerato que convierte creatividad,
+          estrategia y tecnología en un proyecto competitivo dentro de STEM Racing 2026.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#sobre">Conoce el equipo</a>
+          <a class="btn btn-secondary" href="#contacto">Colabora con nosotros</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>2026</strong>
+            <span>Temporada STEM Racing</span>
+          </div>
+          <div class="stat">
+            <strong>1º Bach.</strong>
+            <span>IES Sevilla La Nueva</span>
+          </div>
+          <div class="stat">
+            <strong>100%</strong>
+            <span>Compromiso y evolución</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="panel-top">
+          <span>Panel de rendimiento</span>
+          <div class="dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="car-track">
+          <div class="track-line"></div>
+          <div class="car"></div>
+          <div class="wheel w1"></div>
+          <div class="wheel w2"></div>
+          <div class="wheel w3"></div>
+          <div class="wheel w4"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="sobre">
+    <div class="container">
+      <div class="section-head">
+        <h2>Sobre nosotros</h2>
+        <p>
+          Hagen Racing Team nace con una idea clara: demostrar que un equipo escolar puede trabajar con una mentalidad
+          profesional, cuidando el diseño, la organización, la comunicación y la mejora continua.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Quiénes somos</h3>
+          <p>
+            Somos estudiantes de 1º de Bachillerato del IES Sevilla La Nueva que participamos en STEM Racing 2026.
+            Este proyecto nos permite aplicar conocimientos reales de ingeniería, marketing, identidad visual,
+            planificación y trabajo en equipo dentro de una competición inspirada en la Fórmula 1.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Qué nos define</h3>
+          <p>
+            Precisión, constancia y ambición. No entendemos este reto como una actividad aislada, sino como una oportunidad
+            para crecer, aprender a tomar decisiones y construir algo serio, bien presentado y competitivo.
+          </p>
+        </article>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <div class="num">01</div>
+          <h3>Innovación</h3>
+          <p>Buscamos mejoras en cada detalle para avanzar con criterio y creatividad.</p>
+        </div>
+        <div class="feature">
+          <div class="num">02</div>
+          <h3>Ingeniería</h3>
+          <p>Aplicamos análisis, diseño y optimización para desarrollar un coche eficiente.</p>
+        </div>
+        <div class="feature">
+          <div class="num">03</div>
+          <h3>Estrategia</h3>
+          <p>Organizamos recursos, tiempos y comunicación con una visión clara del proyecto.</p>
+        </div>
+        <div class="feature">
+          <div class="num">04</div>
+          <h3>Equipo</h3>
+          <p>Creemos en el compromiso individual como base del rendimiento colectivo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyecto">
+    <div class="container">
+      <div class="section-head">
+        <h2>El proyecto</h2>
+        <p>
+          STEM Racing reúne ciencia, tecnología, ingeniería y comunicación en un entorno competitivo donde cada decisión importa.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Objetivo</h3>
+          <p>
+            Diseñar, desarrollar y presentar un coche de competición en miniatura capaz de reflejar un trabajo sólido,
+            una identidad de equipo coherente y una evolución constante durante toda la temporada.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Áreas de trabajo</h3>
+          <ul>
+            <li>Diseño y optimización del coche</li>
+            <li>Imagen e identidad del equipo</li>
+            <li>Comunicación y presencia digital</li>
+            <li>Patrocinio, organización y estrategia</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="equipo">
+    <div class="container">
+      <div class="section-head">
+        <h2>Nuestro equipo</h2>
+        <p>
+          Aquí puedes colocar los nombres reales cuando los tengas. Te he dejado una estructura profesional ya preparada.
+        </p>
+      </div>
+
+      <div class="team-grid">
+        <article class="team-card">
+          <div class="avatar">01</div>
+          <h3>Nombre Apellido</h3>
+          <span class="role">Team Manager</span>
+          <p>Coordinación general, planificación, seguimiento del proyecto y toma de decisiones.</p>
+        </article>
+        <article class="team-card">
+          <div class="avatar">02</div>
+          <h3>Nombre Apellido</h3>
+          <span class="role">Ingeniería</span>
+          <p>Diseño técnico, análisis del coche y mejora del rendimiento.</p>
+        </article>
+        <article class="team-card">
+          <div class="avatar">03</div>
+          <h3>Nombre Apellido</h3>
+          <span class="role">Marketing</span>
+          <p>Comunicación, redes, presentación visual y búsqueda de visibilidad.</p>
+        </article>
+        <article class="team-card">
+          <div class="avatar">04</div>
+          <h3>Nombre Apellido</h3>
+          <span class="role">Patrocinio</span>
+          <p>Relación con colaboradores, documentación y propuestas de apoyo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="patrocinio">
+    <div class="container sponsors">
+      <article class="card">
+        <h3>Patrocinadores y colaboradores</h3>
+        <p>
+          Estamos abiertos a colaboraciones con empresas, entidades y profesionales que quieran apoyar un proyecto educativo,
+          tecnológico y con proyección. El patrocinio nos ayuda a mejorar recursos, visibilidad y oportunidades de aprendizaje.
+        </p>
+        <div class="logo-grid">
+          <div class="logo-box">Espacio para logo</div>
+          <div class="logo-box">Espacio para logo</div>
+          <div class="logo-box">Espacio para logo</div>
+          <div class="logo-box">Espacio para logo</div>
+          <div class="logo-box">Espacio para logo</div>
+          <div class="logo-box">Espacio para logo</div>
+        </div>
+      </article>
+
+      <article class="card cta">
+        <h3>Por qué apoyar a Hagen Racing Team</h3>
+        <p>
+          Porque detrás del proyecto hay aprendizaje real, compromiso, iniciativa y una forma seria de representar a nuestro centro.
+        </p>
+        <ul>
+          <li>Visibilidad en nuestra web y materiales del equipo</li>
+          <li>Asociación con un proyecto STEM educativo</li>
+          <li>Impulso al talento joven y la innovación</li>
+        </ul>
+        <div style="margin-top:18px;">
+          <a class="btn btn-primary" href="#contacto">Quiero colaborar</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="container">
+      <article class="card contact-box">
+        <div>
+          <h2 style="margin:0 0 12px; font-size:clamp(1.8rem,4vw,2.6rem);">Contacto</h2>
+          <p style="margin:0; color:var(--muted);">
+            Puedes cambiar este correo por el real del equipo cuando lo tengáis listo.
+            También puedes añadir Instagram, LinkedIn o cualquier otra red si la abrís.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="mailto:hagenracingteam@gmail.com">hagenracingteam@gmail.com</a>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 Hagen Racing Team</div>
+      <div>IES Sevilla La Nueva · STEM Racing 2026</div>
+    </div>
+  </footer>
+</body>
+</html>
